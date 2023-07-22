@@ -35,7 +35,7 @@ public class DependencyDemo
     /**
      * Test creating a directed graph, checking it for cycles and either outputting cycles detected
      * or topological ordering if not.
-     * 
+     *
      * @param createCycles true - create a directed graph which contains cycles. false - create a
      *        directed graph which does not contain any cycles.
      */
@@ -117,7 +117,8 @@ public class DependencyDemo
 
     /**
      * Generate two cases, one with cycles, this is dependencies and one without.
-     * 
+     * 生成两种示例，一种有循环，这是依赖项，另一种没有循环。
+     *
      * @param args Ignored.
      */
     public static void main(String[] args)

@@ -32,6 +32,7 @@ import java.util.function.*;
 
 /**
  * Demonstrates how to create a complete graph and perform a depth first search on it.
+ * 演示如何创建完全图并对其执行深度优先搜索。
  *
  */
 // @example:class:begin
@@ -42,7 +43,7 @@ public final class CompleteGraphDemo
 
     /**
      * Main demo entry point.
-     * 
+     *
      * @param args command line arguments
      */
     public static void main(String[] args)

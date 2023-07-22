@@ -26,16 +26,21 @@ import java.util.*;
 
 /**
  * A simple demo to test memory and CPU consumption on a graph with 3 million elements.
+ * 一个简单演示，用于在包含 300 万个元素的图表上测试内存和 CPU 消耗。
  *
  * <p>
  * NOTE: To run this demo you may need to increase the JVM max mem size. In Sun's JVM it is done
  * using the "-Xmx" switch. Specify "-Xmx300M" to set it to 300MB.
+ * 注意：要运行此演示，您可能需要增加 JVM 最大内存大小。在 Sun 的 JVM 中，这是使用“-Xmx”开关完成的。指定“-Xmx300M”将其设置为 300MB。
+ *
  * </p>
  *
  * <p>
  * WARNING: Don't run this demo as-is on machines with less than 512MB memory. Your machine will
  * start paging severely. You need to first modify it to have fewer graph elements. This is easily
  * done by changing the loop counters below.
+ * 警告：请勿在内存小于 512MB 的计算机上按原样运行此演示。你的机器将开始严重分页。您需要首先修改它以减少图形元素。通过更改下面的循环计数器可以轻松完成此操作。
+ *
  * </p>
  *
  * @author Barak Naveh

@@ -38,6 +38,10 @@ import java.util.*;
  * org.jgrapht.alg.shortestpath.DijkstraShortestPath can be used to find shortest paths within
  * directed graphs.
  *
+ * 此类演示了可以在有向图上执行的一些操作。构建基本有向图后，它计算该图的所有强连通分量。
+ * 然后，它使用 Dijkstra 的最短路径算法找到从一个顶点到另一个顶点的最短路径。
+ * 示例代码应该有助于向 JGraphT 用户阐明，类 org.jgrapht.alg.shortestpath.DijkstraShortestPath 可用于查找有向图中的最短路径。
+ *
  * @author Minh Van Nguyen
  */
 public class DirectedGraphDemo

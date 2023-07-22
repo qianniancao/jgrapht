@@ -37,6 +37,9 @@ import java.util.function.*;
  *
  * The demo constructs a complete graph with random edge weights and exports it as GraphML. The
  * output is then re-imported into a second graph.
+ *
+ * 此类演示在 GraphML 中导出和导入具有自定义顶点和边属性的图。图的顶点具有称为“颜色”的属性和“名称”属性。边具有“权重”属性和“名称”属性。
+ * 该演示使用随机边权重构建一个完整的图并将其导出为 GraphML。然后输出被重新导入到第二个图中。
  */
 public final class GraphMLDemo
 {

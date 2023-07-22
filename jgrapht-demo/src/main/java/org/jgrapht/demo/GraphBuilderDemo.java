@@ -23,6 +23,7 @@ import org.jgrapht.graph.builder.*;
 
 /**
  * Demonstrates how to use {@link GraphTypeBuilder} and {@link GraphBuilder}.
+ * 演示如何使用 {@link GraphTypeBuilder} 和 {@link GraphBuilder}。
  *
  * @author John Sichi
  */
@@ -30,7 +31,7 @@ public final class GraphBuilderDemo
 {
     /**
      * Main demo entry point.
-     * 
+     *
      * @param args command line arguments
      */
     public static void main(String[] args)

@@ -26,6 +26,9 @@ import org.jgrapht.alg.util.*;
  * {@literal <a href = "https://en.wikipedia.org/wiki/Knight%27s_tour">}closed knight's tour
  * problem{@literal </a>}.
  *
+ * 使用Parberry算法解决封闭型骑士巡游问题的实现。
+ * （下面是对这个问题的介绍，翻译不好，建议直接去网上查阅相关资料）
+ *
  * This algorithm was firstly introduced in "Discrete Applied Mathematics" Volume 73, Issue 3, 21
  * March 1997, Pages 251-260.
  *
@@ -38,6 +41,8 @@ import org.jgrapht.alg.util.*;
  *
  * The time complexity of the algorithm is linear in the size of the board, i.e. it is equal to
  * $O(n^2)$, where $n$ is one dimension of the board.
+ *
+ * 该算法的时间复杂度与棋盘的大小成线性关系，即它等于 O(n^2)，其中 n 是棋盘的尺寸。
  *
  * The Parberry's algorithm finds CLOSED knight's tour for all boards with size $n \times n$ and $n
  * \times n + 2$, where $n$ is even and $n \geq 6$.
@@ -73,7 +78,10 @@ import org.jgrapht.alg.util.*;
  * problem for these $4$ boards recursively. Delete the edges which contract the start and the
  * finish cell of the tour on each board, so that on each on $4$ boards closed knight's tour became
  * open knight's tour. Contract these $4$ boards by adding $4$ additional edges between the
- * quadrants.
+ *
+ * 算法描述：将初始棋盘尽可能均匀地分割成4块棋盘。递归地解决这 4 块棋盘的问题。删除每个棋盘上作为旅程开始和结束单元格的边，
+ * 使得 4 个棋盘上的每个棋盘上封闭型骑士之旅变成开放型骑士之旅。通过在象限之间添加 4 个额外的边来收缩这 4 个板。
+ *
  */
 
 public class ParberryKnightTour
@@ -92,7 +100,7 @@ public class ParberryKnightTour
 
     /**
      * Constructor.
-     * 
+     *
      * @param n width of the board.
      * @param m height of the board.
      */
@@ -122,7 +130,7 @@ public class ParberryKnightTour
     /**
      * Generates a closed knight's tour for a piece of the board which is being set by left-upper
      * and right-bottom cells.
-     * 
+     *
      * @param start left-upper cell of the piece of the original chessboard.
      * @param end right-bottom cell of the piece of the original chessboard.
      * @return closed knight's tour on this piece of the board.
@@ -208,7 +216,7 @@ public class ParberryKnightTour
 
         /*
          * Removing edges A, B, C and D.
-         * 
+         *
          * ######################################### #*******************|*******************#
          * #*******************|*******************# #*******************|*******************#
          * #******TOUR 1*******|******TOUR 2*******# #*******************|*******************#
@@ -223,7 +231,7 @@ public class ParberryKnightTour
 
         /*
          * Adding edges E, F, G, H to contract the quadrants.
-         * 
+         *
          * ######################################### #*******************|*******************#
          * #*******************|*******************# #*******************|*******************#
          * #******TOUR 1*******|******TOUR 2*******# #*******************|*******************#
@@ -240,7 +248,7 @@ public class ParberryKnightTour
          * Relation between nodes in structured array and endpoints of the edges to be
          * deleted/added. Note that you don't know the direction of the edges A, B, C, D, so you
          * have to check both options.
-         * 
+         *
          * ######################################### #**0***************2|**0***************2#
          * #1******************|1******************# #*****************3*|*****************3*#
          * #******TOUR 1*******|******TOUR 2*******# #*******************|*******************#
@@ -251,32 +259,32 @@ public class ParberryKnightTour
          * #*******************|*******************# #*4*****************|*4*****************#
          * #******************6|******************6# #5***************7**|5***************7**#
          * ######################################### _________________________________
-         * 
+         *
          * A.start = tour1.forStructured[6]; A.end = tour1.forStructured[7];
-         * 
+         *
          * or
-         * 
+         *
          * A.end = tour1.forStructured[6]; A.start = tour1.forStructured[7];
          * __________________________________
-         * 
+         *
          * B.start = tour2.forStructured[4]; B.end = tour2.forStructured[5];
-         * 
+         *
          * or
-         * 
+         *
          * B.end = tour2.forStructured[4]; B.start = tour2.forStructured[5];
          * __________________________________
-         * 
+         *
          * C.start = tour4.forStructured[0]; C.end = tour4.forStructured[1];
-         * 
+         *
          * or
-         * 
+         *
          * C.end = tour4.forStructured[0]; C.start = tour4.forStructured[1];
          * __________________________________
-         * 
+         *
          * D.start = tour2.forStructured[2]; D.end = tour2.forStructured[3];
-         * 
+         *
          * or
-         * 
+         *
          * D.end = tour2.forStructured[2]; D.start = tour2.forStructured[3];
          * __________________________________
          */
@@ -350,7 +358,7 @@ public class ParberryKnightTour
 
     /**
      * Returns a closed knight's tour.
-     * 
+     *
      * @return closed knight's tour.
      */
 
