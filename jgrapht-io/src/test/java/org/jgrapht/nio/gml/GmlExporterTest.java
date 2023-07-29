@@ -79,7 +79,38 @@ public class GmlExporterTest
             + "\t\ttarget 1" + NL
             + "\t]" + NL
             + "]" + NL;
-    
+
+    private static final String UNDIRECTED_GRAPHICS_SECTION =
+            "Creator \"JGraphT GML Exporter\"" + NL
+            + "Version 1" + NL
+            + "graph" + NL
+            + "[" + NL
+            + "\tlabel \"\"" + NL
+            + "\tdirected 0" + NL
+            + "\tnode" + NL
+            + "\t[" + NL
+            + "\t\tid 1" + NL
+            + "\t\tgraphics" + NL
+            + "\t\t[" + NL
+            + "\t\t\tfill \"#FF0000\"" + NL
+            + "\t\t]" + NL
+            + "\t]" + NL
+            + "\tnode" + NL
+            + "\t[" + NL
+            + "\t\tid 2" + NL
+            + "\t\tgraphics" + NL
+            + "\t\t[" + NL
+            + "\t\t\tfill \"#FF0000\"" + NL
+            + "\t\t]" + NL
+            + "\t]" + NL
+            + "\tedge" + NL
+            + "\t[" + NL
+            + "\t\tid 1" + NL
+            + "\t\tsource 1" + NL
+            + "\t\ttarget 2" + NL
+            + "\t]" + NL
+            + "]" + NL;
+
     private static final String UNDIRECTED_WEIGHTED
             = "Creator \"JGraphT GML Exporter\"" + NL
             + "Version 1" + NL
@@ -310,6 +341,26 @@ public class GmlExporterTest
         exporter.exportGraph(g, os);
         String res = new String(os.toByteArray(), "UTF-8");
         assertEquals(UNDIRECTED, res);
+    }
+
+    @Test
+    public void testGraphicsSection()
+            throws UnsupportedEncodingException,
+            ExportException
+    {
+        Graph<String, DefaultEdge> g = new SimpleGraph<String, DefaultEdge>(DefaultEdge.class);
+        g.addVertex(V1);
+        g.addVertex(V2);
+        g.addEdge(V1, V2);
+
+        GmlExporter<String, DefaultEdge> exporter = new GmlExporter<String, DefaultEdge>();
+        exporter.setParameter(GmlExporter.Parameter.EXPORT_CUSTOM_VERTEX_GRAPHICS_ATTRIBUTES, true);
+        exporter.setEdgeIdProvider(new IntegerIdProvider<>());
+        exporter.setVertexGraphicsAttributeProvider(v -> Map.of("fill", DefaultAttribute.createAttribute("#FF0000")));
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        exporter.exportGraph(g, os);
+        String res = new String(os.toByteArray(), "UTF-8");
+        assertEquals(UNDIRECTED_GRAPHICS_SECTION, res);
     }
 
     @Test

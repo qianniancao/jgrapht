@@ -32,12 +32,12 @@ import java.util.function.*;
  * For a description of the format see <a href=
  * "https://github.com/GunterMueller/UNI_PASSAU_FMI_Graph_Drawing/blob/master/GML/gml-technical-report.pdf">
  * https://github.com/GunterMueller/UNI_PASSAU_FMI_Graph_Drawing/blob/master/GML/gml-technical-report.pdf</a>.
- * 
+ *
  * <p>
  * The behavior of the exporter such as whether to print vertex labels, edge labels, and/or edge
  * weights can be adjusted using the {@link #setParameter(Parameter, boolean) setParameter} method.
  * When exporting labels, the exporter escapes them as Java strings.
- * 
+ *
  * @param <V> the graph vertex type
  * @param <E> the graph edge type
  *
@@ -53,6 +53,7 @@ public class GmlExporter<V, E>
     private static final String DELIM = " ";
     private static final String TAB1 = "\t";
     private static final String TAB2 = "\t\t";
+    private static final String TAB3 = "\t\t\t";
 
     private static final String LABEL_ATTRIBUTE_KEY = "label";
     private static final String WEIGHT_ATTRIBUTE_KEY = "weight";
@@ -62,6 +63,8 @@ public class GmlExporter<V, E>
         Set.of("id", "source", "target");
 
     private final Set<Parameter> parameters;
+
+    protected Optional<Function<V, Map<String, Attribute>>> vertexGraphicsAttributeProvider;
 
     /**
      * Parameters that affect the behavior of the {@link GmlExporter} exporter.
@@ -97,6 +100,10 @@ public class GmlExporter<V, E>
          */
         EXPORT_CUSTOM_VERTEX_ATTRIBUTES,
         /**
+         * If set the exporter outputs graphics section attributes for nodes
+         */
+        EXPORT_CUSTOM_VERTEX_GRAPHICS_ATTRIBUTES,
+        /**
          * If set the exporter escapes all strings as Java strings, otherwise no escaping is
          * performed.
          */
@@ -120,6 +127,7 @@ public class GmlExporter<V, E>
     {
         super(vertexIdProvider);
         this.parameters = new HashSet<>();
+        this.vertexGraphicsAttributeProvider = Optional.empty();
     }
 
     /**
@@ -155,7 +163,7 @@ public class GmlExporter<V, E>
 
     /**
      * Return if a particular parameter of the exporter is enabled
-     * 
+     *
      * @param p the parameter
      * @return {@code true} if the parameter is set, {@code false} otherwise
      */
@@ -166,7 +174,7 @@ public class GmlExporter<V, E>
 
     /**
      * Set the value of a parameter of the exporter
-     * 
+     *
      * @param p the parameter
      * @param value the value to set
      */
@@ -177,6 +185,21 @@ public class GmlExporter<V, E>
         } else {
             parameters.remove(p);
         }
+    }
+
+    /**
+     * Set node craphics section provider
+     * @param vertexGraphicsAttributeProvider the graphics section attributes provider
+     */
+    public void setVertexGraphicsAttributeProvider(Function<V, Map<String, Attribute>> vertexGraphicsAttributeProvider)
+    {
+        this.vertexGraphicsAttributeProvider = Optional.ofNullable(vertexGraphicsAttributeProvider);
+    }
+
+
+    protected Optional<Map<String, Attribute>> getVertexGraphicsAttributes(V v)
+    {
+        return vertexGraphicsAttributeProvider.map(x -> x.apply(v));
     }
 
     private String quoted(final String s)
@@ -197,22 +220,27 @@ public class GmlExporter<V, E>
 
     private void exportAttribute(PrintWriter out, String key, Attribute attribute)
     {
+        exportAttribute(out, key, attribute, TAB2);
+    }
+
+    private void exportAttribute(PrintWriter out, String key, Attribute attribute, String prefix)
+    {
         AttributeType type = attribute.getType();
         switch (type) {
         case INT:
-            out.println(TAB2 + key + DELIM + Integer.valueOf(attribute.getValue()));
+            out.println(prefix + key + DELIM + Integer.valueOf(attribute.getValue()));
             break;
         case LONG:
-            out.println(TAB2 + key + DELIM + Long.valueOf(attribute.getValue()));
+            out.println(prefix + key + DELIM + Long.valueOf(attribute.getValue()));
             break;
         case FLOAT:
-            out.println(TAB2 + key + DELIM + Float.valueOf(attribute.getValue()));
+            out.println(prefix + key + DELIM + Float.valueOf(attribute.getValue()));
             break;
         case DOUBLE:
-            out.println(TAB2 + key + DELIM + Double.valueOf(attribute.getValue()));
+            out.println(prefix + key + DELIM + Double.valueOf(attribute.getValue()));
             break;
         default:
-            out.println(TAB2 + key + DELIM + quoted(attribute.getValue()));
+            out.println(prefix + key + DELIM + quoted(attribute.getValue()));
             break;
         }
     }
@@ -220,8 +248,8 @@ public class GmlExporter<V, E>
     private void exportVertices(PrintWriter out, Graph<V, E> g)
     {
         boolean exportVertexLabels = parameters.contains(Parameter.EXPORT_VERTEX_LABELS);
-        boolean exportCustomVertexAttributes =
-            parameters.contains(Parameter.EXPORT_CUSTOM_VERTEX_ATTRIBUTES);
+        boolean exportCustomVertexAttributes = parameters.contains(Parameter.EXPORT_CUSTOM_VERTEX_ATTRIBUTES);
+        boolean exportCustomNodeGraphicsAttributes = parameters.contains(Parameter.EXPORT_CUSTOM_VERTEX_GRAPHICS_ATTRIBUTES);
 
         for (V from : g.vertexSet()) {
             out.println(TAB1 + "node");
@@ -253,6 +281,23 @@ public class GmlExporter<V, E>
                     });
                 });
             }
+            if (exportCustomNodeGraphicsAttributes) {
+                getVertexGraphicsAttributes(from).ifPresent(graphicsAttributes -> {
+                    out.println(TAB2 + "graphics\n" + TAB2 + "[");
+                    graphicsAttributes.entrySet().stream().forEach(e -> {
+                        String customAttributeKey = e.getKey();
+                        Attribute customAttributeValue = e.getValue();
+
+                        if (FORBIDDEN_VERTEX_CUSTOM_ATTRIBUTE_KEYS.contains(customAttributeKey)) {
+                            throw new IllegalArgumentException(
+                                    "Key " + customAttributeKey + " is reserved");
+                        }
+
+                        exportAttribute(out, customAttributeKey, customAttributeValue, TAB3);
+                    });
+                    out.println(TAB2 + "]");
+                });
+            }
 
             out.println(TAB1 + "]");
         }
@@ -262,8 +307,7 @@ public class GmlExporter<V, E>
     {
         boolean exportEdgeWeights = parameters.contains(Parameter.EXPORT_EDGE_WEIGHTS);
         boolean exportEdgeLabels = parameters.contains(Parameter.EXPORT_EDGE_LABELS);
-        boolean exportCustomEdgeAttributes =
-            parameters.contains(Parameter.EXPORT_CUSTOM_EDGE_ATTRIBUTES);
+        boolean exportCustomEdgeAttributes = parameters.contains(Parameter.EXPORT_CUSTOM_EDGE_ATTRIBUTES);
 
         for (E edge : g.edgeSet()) {
             out.println(TAB1 + "edge");
