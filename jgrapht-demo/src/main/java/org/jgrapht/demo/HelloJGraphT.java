@@ -38,6 +38,8 @@ import java.util.*;
 /**
  * A simple introduction to using JGraphT.
  *
+ * 简单介绍使用 JGraphT。
+ *
  * @author Barak Naveh
  */
 public final class HelloJGraphT
