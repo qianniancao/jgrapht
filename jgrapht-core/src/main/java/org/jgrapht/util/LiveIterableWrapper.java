@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 
 /**
  * A wrapper around a supplier of an iterable.
- * 
+ * 一个可迭代的供应器的包装类。
  * @author Dimitrios Michail
  *
  * @param <E> the element type
@@ -35,6 +35,7 @@ public class LiveIterableWrapper<E>
 
     /**
      * Create a new wrapper
+     * 创建一个新的包装器（无参构造方法）
      */
     public LiveIterableWrapper()
     {
@@ -43,7 +44,7 @@ public class LiveIterableWrapper<E>
 
     /**
      * Create a new wrapper
-     * 
+     * 创建一个新的包装器（有参构造方法）
      * @param supplier the supplier which provides the iterable
      */
     public LiveIterableWrapper(Supplier<Iterable<E>> supplier)
@@ -59,7 +60,7 @@ public class LiveIterableWrapper<E>
 
     /**
      * Get the supplier
-     * 
+     * 获得一个供应器
      * @return the supplier
      */
     public Supplier<Iterable<E>> getSupplier()
@@ -69,7 +70,7 @@ public class LiveIterableWrapper<E>
 
     /**
      * Set the supplier
-     * 
+     * 设置一个供应器
      * @param supplier the supplier
      */
     public void setSupplier(Supplier<Iterable<E>> supplier)
