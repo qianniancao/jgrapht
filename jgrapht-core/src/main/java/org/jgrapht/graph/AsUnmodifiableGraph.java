@@ -28,10 +28,15 @@ import java.util.*;
  * through" to the backing graph, and attempts to modify this graph result in an <code>
  * UnsupportedOperationException</code>.
  *
+ * 翻译：构造函数中指定的后备图的不可修改视图。此图允许模块向用户提供对内部图的“只读”访问。
+ * 此图上的查询操作“读取”到后备图，并且尝试修改此图会导致<code> UnsupportedOperationException </ code>。
+ *
  * <p>
  * This graph does <i>not</i> pass the hashCode and equals operations through to the backing graph,
  * but relies on <code>Object</code>'s <code>equals</code> and <code>hashCode</code> methods. This
  * graph will be serializable if the backing graph is serializable.
+ *
+ * 翻译：此图不会将hashCode和equals操作传递到后备图，而是依赖于<code> Object </ code>的<code> equals </ code>和<code> hashCode </ code>方法。
  * </p>
  *
  * @param <V> the graph vertex type
