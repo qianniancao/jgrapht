@@ -26,6 +26,8 @@ import org.jgrapht.GraphIterables;
  * The default implementation of the graph iterables which simply delegates to the set
  * implementations.
  *
+ * 图可迭代的默认实现，简单地委托给集合实现。
+ *
  * @author Dimitrios Michail
  *
  * @param <V> the graph vertex type
@@ -36,11 +38,13 @@ public class DefaultGraphIterables<V, E>
 {
     /**
      * The underlying graph
+     * 底层图
      */
     protected Graph<V, E> graph;
 
     /**
      * Create new graph iterables
+     * 创建新的图可迭代（无参构造方法）
      */
     public DefaultGraphIterables()
     {
@@ -49,7 +53,7 @@ public class DefaultGraphIterables<V, E>
 
     /**
      * Create new graph iterables
-     * 
+     * 创建新的图可迭代（有参构造方法）
      * @param graph the underlying graph
      */
     public DefaultGraphIterables(Graph<V, E> graph)
