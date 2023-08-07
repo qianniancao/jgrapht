@@ -23,13 +23,17 @@ import java.util.*;
  * Helper class for building a one-to-one mapping for a collection of vertices to the integer range
  * $[0, n)$ where $n$ is the number of vertices in the collection.
  *
+ * 用于构建一个一对一映射的帮助类，用于将顶点的集合映射到整数范围$[0, n)$，其中$n$是集合中顶点的数量。
+ *
  * <p>
  * This class computes the mapping only once, on instantiation. It does not support live updates.
+ * 此类仅在实例化时计算映射。它不支持实时更新。
  * </p>
  *
  * @author Alexandru Valeanu
  *
  * @param <V> the graph vertex type
+ *           图顶点类型
  */
 public class VertexToIntegerMapping<V>
 {
