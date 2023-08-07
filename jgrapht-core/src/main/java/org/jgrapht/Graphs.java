@@ -26,6 +26,8 @@ import java.util.function.*;
 /**
  * A collection of utilities to assist with graph manipulation.
  *
+ * 用于辅助图操作的实用程序集。
+ *
  * @author Barak Naveh
  */
 public abstract class Graphs
@@ -35,17 +37,27 @@ public abstract class Graphs
      * Creates a new edge and adds it to the specified graph similarly to the
      * {@link Graph#addEdge(Object, Object)} method.
      *
+     * 创建一个新的边并将其添加到指定的图中，类似于Graph#addEdge(Object, Object)方法。
+     *
      * @param g the graph for which the edge to be added
+     *          要添加边的图
      * @param sourceVertex source vertex of the edge
+     *                     边的源顶点
      * @param targetVertex target vertex of the edge
+     *                     边的目标顶点
      * @param weight weight of the edge
+     *               边的权重
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return The newly created edge if added to the graph, otherwise <code>
      * null</code>.
-     * 
+     *        如果添加到图中，则返回新创建的边，否则返回null。
+     *
      * @throws UnsupportedOperationException if the graph has no edge supplier
+     *                                      如果图中没有边供应器
      *
      * @see Graph#addEdge(Object, Object)
      */
@@ -70,6 +82,8 @@ public abstract class Graphs
      * creates a new edge and adds it to the specified graph similarly to the
      * {@link Graph#addEdge(Object, Object)} method.
      *
+     * 如果尚未包含，则将指定的源和目标顶点添加到图中，并创建一个新的边并将其添加到指定的图中，类似于Graph#addEdge(Object, Object)方法。
+     *
      * @param g the graph for which the specified edge to be added
      * @param sourceVertex source vertex of the edge
      * @param targetVertex target vertex of the edge
@@ -77,6 +91,7 @@ public abstract class Graphs
      * @param <E> the graph edge type
      *
      * @return The newly created edge if added to the graph, otherwise <code>
+     *     如果添加到图中，则返回新创建的边，否则返回null。
      * null</code>.
      */
     public static <V, E> E addEdgeWithVertices(Graph<V, E> g, V sourceVertex, V targetVertex)
@@ -90,13 +105,21 @@ public abstract class Graphs
     /**
      * Adds the specified edge to the graph, including its vertices if not already included.
      *
+     * 将指定的边添加到图中，如果尚未包含，则包括其顶点。
+     *
      * @param targetGraph the graph for which the specified edge to be added
+     *                    要添加指定边的图
      * @param sourceGraph the graph in which the specified edge is already present
+     *                    指定边已经存在的图
      * @param edge edge to add
+     *             要添加的边
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return <code>true</code> if the target graph did not already contain the specified edge.
+     *        如果目标图尚未包含指定的边，则返回true。
      */
     public static <V,
         E> boolean addEdgeWithVertices(Graph<V, E> targetGraph, Graph<V, E> sourceGraph, E edge)
@@ -115,14 +138,23 @@ public abstract class Graphs
      * creates a new weighted edge and adds it to the specified graph similarly to the
      * {@link Graph#addEdge(Object, Object)} method.
      *
+     * 如果尚未包含，则将指定的源和目标顶点添加到图中，并创建一个新的加权边并将其添加到指定的图中，类似于Graph#addEdge(Object, Object)方法。
+     *
      * @param g the graph for which the specified edge to be added
+     *          要添加指定边的图
      * @param sourceVertex source vertex of the edge
+     *                     边的源顶点
      * @param targetVertex target vertex of the edge
+     *                     边的目标顶点
      * @param weight weight of the edge
+     *               边的权重
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return The newly created edge if added to the graph, otherwise <code>
+     *     如果添加到图中，则返回新创建的边，否则返回null。
      * null</code>.
      */
     public static <V,
@@ -141,18 +173,28 @@ public abstract class Graphs
      * <code>true</code> if the destination graph has been modified as a result of this operation,
      * otherwise it returns <code>false</code>.
      *
+     * 将指定源图的所有顶点和所有边添加到指定的目标图中。首先将源图的所有顶点添加到目标图中。然后将源图的每条边添加到目标图中。
+     * 如果目标图因此操作而被修改，则此方法返回true，否则返回false。
+     *
      * <p>
      * The behavior of this operation is undefined if any of the specified graphs is modified while
      * operation is in progress.
+     *
+     * 如果在操作正在进行时修改了任何指定的图，则此操作的行为是未定义的。
      * </p>
      *
      * @param destination the graph to which vertices and edges are added
+     *                    要添加顶点和边的图
      * @param source the graph used as source for vertices and edges to add
+     *               用作要添加的顶点和边的源的图
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return <code>true</code> if and only if the destination graph has been changed as a result
      *         of this operation.
+     *         如果且仅当目标图因此操作而更改时，则返回true。
      */
     public static <V,
         E> boolean addGraph(Graph<? super V, ? super E> destination, Graph<V, E> source)
@@ -169,14 +211,23 @@ public abstract class Graphs
      * the source graph (rather than by copying to a destination graph), use
      * {@link EdgeReversedGraph} instead.
      *
+     * 将指定源图的所有顶点和所有边添加到指定的目标图中，反转所有边。
+     * 如果要将此作为源图的链接视图（而不是通过复制到目标图）执行，则使用EdgeReversedGraph。
+     *
      * <p>
      * The behavior of this operation is undefined if any of the specified graphs is modified while
      * operation is in progress.
      *
+     * 如果在操作正在进行时修改了任何指定的图，则此操作的行为是未定义的。
+     *
      * @param destination the graph to which vertices and edges are added
+     *                    要添加顶点和边的图
      * @param source the graph used as source for vertices and edges to add
+     *               用作要添加的顶点和边的源的图
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @see EdgeReversedGraph
      */
@@ -199,6 +250,9 @@ public abstract class Graphs
      * The behavior of this operation is undefined if either of the graphs is modified while the
      * operation is in progress. {@link #addEdgeWithVertices} is used for the transfer, so source
      * vertexes will be added automatically to the target graph.
+     *
+     * 将指定源图的边的子集添加到指定的目标图中。如果在操作正在进行时修改了任何一个图，则此操作的行为是未定义的。
+     * 使用addEdgeWithVertices进行传输，因此源顶点将自动添加到目标图中。
      *
      * @param destination the graph to which edges are to be added
      * @param source the graph used as a source for edges to add
@@ -229,16 +283,25 @@ public abstract class Graphs
      * is undefined if the specified vertex collection is modified while the operation is in
      * progress. This method will invoke the {@link Graph#addVertex(Object)} method.
      *
+     * 将所有指定的顶点添加到目标图中。如果在操作正在进行时修改了指定的顶点集合，则此操作的行为是未定义的。
+     * 此方法将调用Graph.addVertex（Object）方法。
+     *
      * @param destination the graph to which edges are to be added
+     *                    要添加边的图
      * @param vertices the vertices to be added to the graph
+     *                 要添加到图中的顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return <code>true</code> if graph changed as a result of the call
+     *        如果图因调用而更改，则返回true
      *
      * @throws NullPointerException if the specified vertices contains one or more null vertices, or
      *         if the specified vertex collection is <code>
      * null</code>.
+     *        如果指定的顶点包含一个或多个空顶点，或者如果指定的顶点集合为null。
      *
      * @see Graph#addVertex(Object)
      */
@@ -258,15 +321,24 @@ public abstract class Graphs
      * Returns a list of vertices that are the neighbors of a specified vertex. If the graph is a
      * multigraph vertices may appear more than once in the returned list.
      *
+     * 返回一个列表，其中包含指定顶点的邻居。如果图是多图，则顶点可能会多次出现在返回的列表中。
+     *
      * <p>
      * The method uses {@link Graph#edgesOf(Object)} to traverse the graph.
      *
+     * 该方法使用Graph.edgesOf（Object）遍历图。
+     *
      * @param g the graph to look for neighbors in
+     *          要查找邻居的图
      * @param vertex the vertex to get the neighbors of
+     *               要获取邻居的顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return a list of the vertices that are the neighbors of the specified vertex.
+     *        一个列表，其中包含指定顶点的邻居。
      */
     public static <V, E> List<V> neighborListOf(Graph<V, E> g, V vertex)
     {
@@ -282,9 +354,14 @@ public abstract class Graphs
     /**
      * Returns a set of vertices that are neighbors of a specified vertex.
      *
+     * 返回一组顶点，这些顶点是指定顶点的邻居。
+     *
      * @param g the graph to look for neighbors in
+     *          要查找邻居的图
      * @param vertex the vertex to get the neighbors of
+     *               要获取邻居的顶点
      * @param <V> the graph vertex type
+     *
      * @param <E> the graph edge type
      * @return a set of the vertices that are neighbors of the specified vertex
      */
@@ -303,15 +380,24 @@ public abstract class Graphs
      * Returns a list of vertices that are the direct predecessors of a specified vertex. If the
      * graph is a multigraph, vertices may appear more than once in the returned list.
      *
+     * 返回一个列表，其中包含指定顶点的直接前驱。如果图是多图，则顶点可能会多次出现在返回的列表中。
+     *
      * <p>
      * The method uses {@link Graph#incomingEdgesOf(Object)} to traverse the graph.
      *
+     * 该方法使用Graph.incomingEdgesOf（Object）遍历图。
+     *
      * @param g the graph to look for predecessors in
+     *          要查找前驱的图
      * @param vertex the vertex to get the predecessors of
+     *               要获取前驱的顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return a list of the vertices that are the direct predecessors of the specified vertex.
+     *       一个列表，其中包含指定顶点的直接前驱。
      */
     public static <V, E> List<V> predecessorListOf(Graph<V, E> g, V vertex)
     {
@@ -328,15 +414,24 @@ public abstract class Graphs
      * Returns a list of vertices that are the direct successors of a specified vertex. If the graph
      * is a multigraph vertices may appear more than once in the returned list.
      *
+     * 返回一个列表，其中包含指定顶点的直接后继。如果图是多图，则顶点可能会多次出现在返回的列表中。
+     *
      * <p>
      * The method uses {@link Graph#outgoingEdgesOf(Object)} to traverse the graph.
      *
+     * 该方法使用Graph.outgoingEdgesOf（Object）遍历图。
+     *
      * @param g the graph to look for successors in
+     *          要查找后继的图
      * @param vertex the vertex to get the successors of
+     *               要获取后继的顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return a list of the vertices that are the direct successors of the specified vertex.
+     *      一个列表，其中包含指定顶点的直接后继。
      */
     public static <V, E> List<V> successorListOf(Graph<V, E> g, V vertex)
     {
@@ -354,14 +449,21 @@ public abstract class Graphs
      * returns an undirected view of it. If the specified graph is already undirected, just returns
      * it.
      *
+     * 返回指定图的无向视图。如果指定的图是有向的，则返回其无向视图。如果指定的图已经是无向的，则只返回它。
+     *
      * @param g the graph for which an undirected view is to be returned
+     *          要返回无向视图的图
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return an undirected view of the specified graph, if it is directed, or or the specified
      *         graph itself if it is already undirected.
+     *         指定图的无向视图（如果它是有向的），或者如果它已经是无向的，则指定的图本身。
      *
      * @throws IllegalArgumentException if the graph is neither directed nor undirected
+     *                                 如果图既不是有向的也不是无向的
      * @see AsUndirectedGraph
      */
     public static <V, E> Graph<V, E> undirectedGraph(Graph<V, E> g)
@@ -378,13 +480,21 @@ public abstract class Graphs
     /**
      * Tests whether an edge is incident to a vertex.
      *
+     * 测试边缘是否与顶点相邻。
+     *
      * @param g graph containing e and v
+     *          包含e和v的图
      * @param e edge in g
+     *          g中的边缘
      * @param v vertex in g
+     *          g中的顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return true iff e is incident on v
+     *        当且仅当e与v相邻时为真
      */
     public static <V, E> boolean testIncidence(Graph<V, E> g, E e, V v)
     {
@@ -394,13 +504,21 @@ public abstract class Graphs
     /**
      * Gets the vertex opposite another vertex across an edge.
      *
+     * 获取边缘上另一个顶点的对面顶点。
+     *
      * @param g graph containing e and v
+     *          包含e和v的图
      * @param e edge in g
+     *          g中的边缘
      * @param v vertex in g
+     *          g中的顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return vertex opposite to v across e
+     *        在e对面的顶点v
      */
     public static <V, E> V getOppositeVertex(Graph<V, E> g, E e, V v)
     {
@@ -420,12 +538,19 @@ public abstract class Graphs
      * predecessors, the predecessors will be connected directly to the successors of the vertex to
      * be removed.
      *
+     * 从给定的图中删除给定的顶点。如果要删除的顶点有一个或多个前驱，那么前驱节点将直接连接到要删除的顶点的后继。
+     *
      * @param graph graph to be mutated
+     *              要改变的图
      * @param vertex vertex to be removed from this graph, if present
+     *               要从此图中删除的顶点（如果存在）
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return true if the graph contained the specified vertex; false otherwise.
+     *        如果图包含指定的顶点，则为true；否则为false。
      */
     public static <V, E> boolean removeVertexAndPreserveConnectivity(Graph<V, E> graph, V vertex)
     {
@@ -451,13 +576,21 @@ public abstract class Graphs
      * removed has one or more predecessors, the predecessors will be connected directly to the
      * successors of the vertex to be removed.
      *
+     * 从给定的图中过滤顶点，然后删除它们。如果要删除的顶点有一个或多个前驱，那么前驱节点将直接连接到要删除的顶点的后继。
+     *
      * @param graph graph to be mutated
+     *              要改变的图
      * @param predicate a non-interfering stateless predicate to apply to each vertex to determine
      *        if it should be removed from the graph
+     *                  一个非干扰的无状态谓词，用于应用于每个顶点，以确定是否应该从图中删除它
+     *                  （译者注：predicate是一个函数式接口，它接受一个参数，返回一个boolean值）
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return true if at least one vertex has been removed; false otherwise.
+     *       如果至少删除了一个顶点，则为true；否则为false。
      */
     public static <V,
         E> boolean removeVerticesAndPreserveConnectivity(Graph<V, E> graph, Predicate<V> predicate)
@@ -474,16 +607,24 @@ public abstract class Graphs
     }
 
     /**
-     * Removes all the given vertices from the given graph. If the vertex to be removed has one or
+     * Removes all the given vertices from the given
+     * graph. If the vertex to be removed has one or
      * more predecessors, the predecessors will be connected directly to the successors of the
      * vertex to be removed.
      *
+     * 从给定的图中删除所有给定的顶点。如果要删除的顶点有一个或多个前驱，那么前驱节点将直接连接到要删除的顶点的后继。
+     *
      * @param graph to be mutated
+     *              要改变的图
      * @param vertices vertices to be removed from this graph, if present
+     *                 要从此图中删除的顶点（如果存在）
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return true if at least one vertex has been removed; false otherwise.
+     *      如果至少删除了一个顶点，则为true；否则为false。
      */
     public static <V,
         E> boolean removeVertexAndPreserveConnectivity(Graph<V, E> graph, Iterable<V> vertices)
@@ -503,11 +644,18 @@ public abstract class Graphs
      * Add edges from one source vertex to multiple target vertices. Whether duplicates are created
      * depends on the underlying {@link Graph} implementation.
      *
+     * 从一个源顶点添加边到多个目标顶点。是否创建重复取决于底层的{@link Graph}实现。
+     *
      * @param graph graph to be mutated
+     *              要改变的图
      * @param source source vertex of the new edges
+     *               新边的源顶点
      * @param targets target vertices for the new edges
+     *                新边的目标顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      */
     public static <V, E> void addOutgoingEdges(Graph<V, E> graph, V source, Iterable<V> targets)
     {
@@ -526,11 +674,18 @@ public abstract class Graphs
      * Add edges from multiple source vertices to one target vertex. Whether duplicates are created
      * depends on the underlying {@link Graph} implementation.
      *
+     * 从多个源顶点添加边到一个目标顶点。是否创建重复取决于底层的{@link Graph}实现。
+     *
      * @param graph graph to be mutated
+     *              要改变的图
      * @param target target vertex for the new edges
+     *               新边的目标顶点
      * @param sources source vertices for the new edges
+     *                新边的源顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      */
     public static <V, E> void addIncomingEdges(Graph<V, E> graph, V target, Iterable<V> sources)
     {
@@ -548,12 +703,19 @@ public abstract class Graphs
     /**
      * Check if a vertex has any direct successors.
      *
+     * 检查顶点是否有任何直接后继。
+     *
      * @param graph the graph to look for successors
+     *              要查找后继的图
      * @param vertex the vertex to look for successors
+     *               要查找后继的顶点
      * @param <V> the graph vertex type
+     *           图的顶点类型
      * @param <E> the graph edge type
+     *           图的边类型
      *
      * @return true if the vertex has any successors, false otherwise
+     *     如果顶点有任何后继，则为true；否则为false。
      */
     public static <V, E> boolean vertexHasSuccessors(Graph<V, E> graph, V vertex)
     {
