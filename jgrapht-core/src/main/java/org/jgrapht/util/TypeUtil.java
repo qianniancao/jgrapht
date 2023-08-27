@@ -21,6 +21,8 @@ package org.jgrapht.util;
  * TypeUtil isolates type-unsafety so that code which uses it for legitimate reasons can stay
  * warning-free.
  *
+ * 翻译：TypeUtil隔离了类型不安全，因此使用它的代码可以出于合法原因而保持无警告。
+ *
  * @author John V. Sichi
  */
 public class TypeUtil

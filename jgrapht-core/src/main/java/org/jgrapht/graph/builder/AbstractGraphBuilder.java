@@ -324,9 +324,12 @@ public abstract class AbstractGraphBuilder<V, E, G extends Graph<V, E>,
         return this.graph;
     }
 
+
     /**
      * Build an unmodifiable version graph. Calling any method (including this method) on this
      * builder object after calling this method is undefined behaviour.
+     *
+     * 构建不可修改版本的图。在调用此方法之后调用此构建器对象上的任何方法（包括此方法）是未定义的行为。
      *
      * @return the built unmodifiable graph.
      *
