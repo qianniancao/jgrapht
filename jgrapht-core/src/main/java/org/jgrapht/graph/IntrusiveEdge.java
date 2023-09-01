@@ -23,6 +23,8 @@ import java.io.*;
  * IntrusiveEdge encapsulates the internals for the default edge implementation. It is not intended
  * to be referenced directly (which is why it's not public); use DefaultEdge for that.
  *
+ * IntrusiveEdge封装了默认边实现的内部。 它不是直接引用的（这就是为什么它不是公共的）; 用DefaultEdge。
+ *
  * @author John V. Sichi
  */
 class IntrusiveEdge
