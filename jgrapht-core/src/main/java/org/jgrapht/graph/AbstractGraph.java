@@ -27,6 +27,8 @@ import java.util.*;
  * implement graph interfaces. This implementation is applicable to both: directed graphs and
  * undirected graphs.
  *
+ * Graph接口的骨架实现，以最小化实现图接口所需的工作量。 此实现适用于有向图和无向图。
+ *
  * @param <V> the graph vertex type
  * @param <E> the graph edge type
  *
@@ -38,6 +40,7 @@ public abstract class AbstractGraph<V, E>
 {
     /**
      * Construct a new empty graph object.
+     * 构造一个新的空图对象。
      */
     protected AbstractGraph()
     {
@@ -102,6 +105,8 @@ public abstract class AbstractGraph<V, E>
      * string representation of the vertex set, and 'E' is the string representation of the edge
      * set.
      *
+     * 返回表示此G =（V，E）图的括号对（V，E）的字符串。 “ V”是顶点集的字符串表示形式，“ E”是边集的字符串表示形式。
+     *
      * @return a string representation of this graph.
      */
     @Override
@@ -112,6 +117,8 @@ public abstract class AbstractGraph<V, E>
 
     /**
      * Ensures that the specified vertex exists in this graph, or else throws exception.
+     *
+     * 确保此图中存在指定的顶点，否则抛出异常。
      *
      * @param v vertex
      *
@@ -204,6 +211,8 @@ public abstract class AbstractGraph<V, E>
      * of the hash codes of vertices and edges in the graph. It is also based on graph topology and
      * edges weights.
      *
+     * 此图的哈希码值。 图的哈希码定义为图中顶点和边的哈希码之和。 它还基于图形拓扑和边缘权重。
+     *
      * @return the hash code value this graph
      *
      * @see Object#hashCode()
@@ -240,6 +249,8 @@ public abstract class AbstractGraph<V, E>
      * Indicates whether some other object is "equal to" this graph. Returns <code>true</code> if
      * the given object is also a graph, the two graphs are instances of the same graph class, have
      * identical vertices and edges sets with the same weights.
+     *
+     * 指示某个其他对象是否“等于”此图。 如果给定对象也是图形，则返回true，两个图形是相同图形类的实例，具有相同的顶点和边缘集以及相同的权重。
      *
      * @param obj object to be compared for equality with this graph
      *

@@ -23,18 +23,18 @@ import java.io.*;
 
 /**
  * Default implementation of the graph type.
- * 
+ *
  * <p>
  * The graph type describes various properties of a graph such as whether it is directed, undirected
  * or mixed, whether it contain self-loops (a self-loop is an edge where the source vertex is the
  * same as the target vertex), whether it contain multiple (parallel) edges (multiple edges which
  * connect the same pair of vertices) and whether it is weighted or not.
- * 
+ *
  * <p>
  * The type of a graph can be queried on runtime using method {@link Graph#getType()}. This way, for
  * example, an algorithm can have different behavior based on whether the input graph is directed or
  * undirected, etc.
- * 
+ *
  * @author Dimitrios Michail
  */
 public class DefaultGraphType
@@ -174,7 +174,9 @@ public class DefaultGraphType
     /**
      * A simple graph type. An undirected graph for which at most one edge connects any two
      * vertices, and self-loops are not permitted.
-     * 
+     *
+     * 简单图类型。一个无向图，最多有一条边连接任意两个顶点，并且不允许自环。
+     *
      * @return a simple graph type
      */
     public static DefaultGraphType simple()
@@ -186,7 +188,9 @@ public class DefaultGraphType
     /**
      * A multigraph type. A non-simple undirected graph in which no self-loops are permitted, but
      * multiple edges between any two vertices are.
-     * 
+     *
+     * 多图类型。一个非简单的无向图，其中不允许自环，但是任意两个顶点之间的多条边是允许的。
+     *
      * @return a multigraph type
      */
     public static DefaultGraphType multigraph()
@@ -198,19 +202,23 @@ public class DefaultGraphType
     /**
      * A pseudograph type. A non-simple undirected graph in which both graph self-loops and multiple
      * edges are permitted.
-     * 
+     *
+     * 伪图类型。一个非简单的无向图，其中允许图自环和多条边。
+     *
      * @return a pseudograph type
      */
     public static DefaultGraphType pseudograph()
     {
         return new Builder()
-            .undirected().allowSelfLoops(true).allowMultipleEdges(true).weighted(false).build();
+                .undirected().allowSelfLoops(true).allowMultipleEdges(true).weighted(false).build();
     }
 
     /**
      * A directed simple graph type. An undirected graph for which at most one edge connects any two
      * vertices, and self-loops are not permitted.
-     * 
+     *
+     * 有向简单图类型。一个无向图，最多有一条边连接任意两个顶点，并且不允许自环。
+     *
      * @return a directed simple graph type
      */
     public static DefaultGraphType directedSimple()
@@ -222,7 +230,9 @@ public class DefaultGraphType
     /**
      * A directed multigraph type. A non-simple undirected graph in which no self-loops are
      * permitted, but multiple edges between any two vertices are.
-     * 
+     *
+     * 有向多图类型。一个非简单的无向图，其中不允许自环，但是任意两个顶点之间的多条边是允许的。
+     *
      * @return a directed multigraph type
      */
     public static DefaultGraphType directedMultigraph()
@@ -234,7 +244,9 @@ public class DefaultGraphType
     /**
      * A directed pseudograph type. A non-simple undirected graph in which both graph self-loops and
      * multiple edges are permitted.
-     * 
+     *
+     * 有向伪图类型。一个非简单的无向图，其中允许图自环和多条边。
+     *
      * @return a directed pseudograph type
      */
     public static DefaultGraphType directedPseudograph()
@@ -246,7 +258,9 @@ public class DefaultGraphType
     /**
      * A mixed graph type. A graph having a set of undirected and a set of directed edges, which may
      * contain self-loops and multiple edges are permitted.
-     * 
+     *
+     * 混合图类型。具有一组无向边和一组有向边的图，其中可能包含自环和允许多条边。
+     *
      * @return a mixed graph type
      */
     public static DefaultGraphType mixed()
@@ -257,7 +271,9 @@ public class DefaultGraphType
 
     /**
      * A directed acyclic graph.
-     * 
+     *
+     * 有向无环图。
+     *
      * @return a directed acyclic graph type
      */
     public static DefaultGraphType dag()
@@ -277,7 +293,7 @@ public class DefaultGraphType
 
     /**
      * A builder for {@link DefaultGraphType}.
-     * 
+     *
      * @author Dimitrios Michail
      */
     public static class Builder
@@ -292,6 +308,8 @@ public class DefaultGraphType
 
         /**
          * Construct a new Builder.
+         *
+         * 构造一个新的构建器。
          */
         public Builder()
         {
@@ -306,7 +324,9 @@ public class DefaultGraphType
 
         /**
          * Construct a new Builder.
-         * 
+         *
+         * 构造一个新的构建器。
+         *
          * @param type the type to base the builder
          */
         public Builder(GraphType type)
@@ -322,15 +342,19 @@ public class DefaultGraphType
 
         /**
          * Construct a new Builder.
-         * 
+         *
+         * 构造一个新的构建器。
+         *
          * @param directed whether the graph contains directed edges
+         *                 图是否包含有向边
          * @param undirected whether the graph contains undirected edges
+         *                   图是否包含无向边
          */
         public Builder(boolean directed, boolean undirected)
         {
             if (!directed && !undirected) {
                 throw new IllegalArgumentException(
-                    "At least one of directed or undirected must be true");
+                        "At least one of directed or undirected must be true");
             }
             this.directed = directed;
             this.undirected = undirected;
@@ -343,7 +367,9 @@ public class DefaultGraphType
 
         /**
          * Set the type as directed.
-         * 
+         *
+         * 将类型设置为有向。
+         *
          * @return the builder
          */
         public Builder directed()
@@ -355,7 +381,9 @@ public class DefaultGraphType
 
         /**
          * Set the type as undirected.
-         * 
+         *
+         *
+         *
          * @return the builder
          */
         public Builder undirected()
@@ -367,7 +395,7 @@ public class DefaultGraphType
 
         /**
          * Set the type as mixed.
-         * 
+         *
          * @return the builder
          */
         public Builder mixed()
@@ -379,7 +407,7 @@ public class DefaultGraphType
 
         /**
          * Set whether to allow self-loops.
-         * 
+         *
          * @param value if true self-values are allowed, otherwise not
          * @return the builder
          */
@@ -391,7 +419,7 @@ public class DefaultGraphType
 
         /**
          * Set whether to allow multiple edges.
-         * 
+         *
          * @param value if true multiple edges are allowed, otherwise not
          * @return the builder
          */
@@ -403,7 +431,7 @@ public class DefaultGraphType
 
         /**
          * Set whether the graph will be weighted.
-         * 
+         *
          * @param value if true the graph will be weighted, otherwise unweighted
          * @return the builder
          */
@@ -415,7 +443,7 @@ public class DefaultGraphType
 
         /**
          * Set whether the graph will allow cycles.
-         * 
+         *
          * @param value if true the graph will allow cycles, otherwise not
          * @return the builder
          */
@@ -427,7 +455,7 @@ public class DefaultGraphType
 
         /**
          * Set whether the graph is modifiable.
-         * 
+         *
          * @param value if true the graph will be modifiable, otherwise not
          * @return the builder
          */
@@ -439,7 +467,7 @@ public class DefaultGraphType
 
         /**
          * Build the type.
-         * 
+         *
          * @return the type
          */
         public DefaultGraphType build()
