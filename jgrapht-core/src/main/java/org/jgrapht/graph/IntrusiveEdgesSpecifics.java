@@ -22,10 +22,14 @@ import java.util.*;
 
 /**
  * An interface for the set of intrusive edges of a graph.
- * 
+ *
+ * 图的侵入式边的集合的接口。
+ *
  * <p>
  * Since the library supports edges which can be any user defined object, we need to provide
  * explicit support for storing vertex source, target and weight.
+ *
+ * 由于库支持可以是任何用户定义对象的边，因此我们需要提供显式支持以存储顶点源，目标和权重。
  *
  * @param <V> the graph vertex type
  * @param <E> the graph edge type
@@ -37,7 +41,7 @@ public interface IntrusiveEdgesSpecifics<V, E>
 {
     /**
      * Get the source vertex of an edge.
-     * 
+     *
      * @param e the edge
      * @return the source vertex
      */
@@ -45,7 +49,7 @@ public interface IntrusiveEdgesSpecifics<V, E>
 
     /**
      * Get the target vertex of an edge.
-     * 
+     *
      * @param e the edge
      * @return the target vertex
      */
@@ -53,7 +57,7 @@ public interface IntrusiveEdgesSpecifics<V, E>
 
     /**
      * Add a new edge.
-     * 
+     *
      * @param e the edge to add
      * @param sourceVertex the source vertex
      * @param targetVertex the target vertex
@@ -63,7 +67,7 @@ public interface IntrusiveEdgesSpecifics<V, E>
 
     /**
      * Check if an edge exists
-     * 
+     *
      * @param e the input edge
      * @return true if an edge exists, false otherwise
      */
@@ -71,21 +75,21 @@ public interface IntrusiveEdgesSpecifics<V, E>
 
     /**
      * Get the edge set
-     * 
+     *
      * @return the edge set
      */
     Set<E> getEdgeSet();
 
     /**
      * Remove an edge.
-     * 
+     *
      * @param e the edge to remove.
      */
     void remove(E e);
 
     /**
      * Get the weight of an edge.
-     * 
+     *
      * @param e the edge
      * @return the edge weight
      */
@@ -93,7 +97,7 @@ public interface IntrusiveEdgesSpecifics<V, E>
 
     /**
      * Set the edge weight
-     * 
+     *
      * @param e the edge
      * @param weight the new weight
      */

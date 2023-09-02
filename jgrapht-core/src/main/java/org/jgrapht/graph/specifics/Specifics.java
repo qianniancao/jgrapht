@@ -24,6 +24,8 @@ import java.util.function.*;
  * An interface encapsulating the basic graph operations. Different implementations have different
  * space-time tradeoffs.
  *
+ * 封装基本图操作的接口。不同的实现具有不同的空间-时间优化权衡。
+ *
  * @param <V> the graph vertex type
  * @param <E> the graph edge type
  *
@@ -41,7 +43,7 @@ public interface Specifics<V, E>
 
     /**
      * Get the vertex set.
-     * 
+     *
      * @return the vertex set
      */
     Set<V> getVertexSet();
@@ -50,6 +52,8 @@ public interface Specifics<V, E>
      * Returns a set of all edges connecting source vertex to target vertex if such vertices exist
      * in this graph. If any of the vertices does not exist or is <code>null</code>, returns
      * <code>null</code>. If both vertices exist but no edges found, returns an empty set.
+     *
+     * 如果这样的顶点存在于这个图中，则返回连接源顶点和目标顶点的所有边的集合。如果任何一个顶点不存在或为null，则返回null。如果两个顶点都存在但没有找到边，则返回一个空集。
      *
      * @param sourceVertex source vertex of the edge.
      * @param targetVertex target vertex of the edge.
@@ -77,7 +81,7 @@ public interface Specifics<V, E>
 
     /**
      * Adds the specified edge to the edge containers of its source and target vertices.
-     * 
+     *
      * @param sourceVertex the source vertex
      * @param targetVertex the target vertex
      * @param e the edge
@@ -88,7 +92,7 @@ public interface Specifics<V, E>
     /**
      * Adds the specified edge to the edge containers of its source and target vertices only if the
      * edge is not already in the graph.
-     * 
+     *
      * @param sourceVertex the source vertex
      * @param targetVertex the target vertex
      * @param e the edge
@@ -100,7 +104,7 @@ public interface Specifics<V, E>
      * Creates an edge given an edge supplier and adds it to the edge containers of its source and
      * target vertices only if the graph does not contain other edges with the same source and
      * target vertices.
-     * 
+     *
      * @param sourceVertex the source vertex
      * @param targetVertex the target vertex
      * @param edgeSupplier the function which will create the edge
