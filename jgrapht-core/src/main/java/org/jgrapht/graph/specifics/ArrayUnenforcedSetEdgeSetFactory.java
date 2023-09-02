@@ -27,9 +27,11 @@ import java.util.*;
  * An edge set factory which creates {@link ArrayUnenforcedSet} of size 1, suitable for small degree
  * vertices.
  *
+ * 一个边集工厂，它创建大小为1的ArrayUnenforcedSet，适用于小度顶点。
+ *
  * @param <V> the graph vertex type
  * @param <E> the graph edge type
- * 
+ *
  * @author Barak Naveh
  */
 public class ArrayUnenforcedSetEdgeSetFactory<V, E>
