@@ -28,16 +28,22 @@ import java.util.function.*;
 /**
  * The most general implementation of the {@link org.jgrapht.Graph} interface.
  *
+ * org.jgrapht.Graph接口的最通用实现。
+ *
  * <p>
  * Its subclasses add various restrictions to get more specific graphs. The decision whether it is
  * directed or undirected is decided at construction time and cannot be later modified (see
  * constructor for details).
+ *
+ * 它的子类添加了各种限制以获得更具体的图形。 它是有向还是无向的决定在构建时决定，不能以后修改（有关详细信息，请参阅构造函数）。
  *
  * <p>
  * The behavior of this class can be adjusted by changing the {@link GraphSpecificsStrategy} that is
  * provided from the constructor. All implemented strategies guarantee deterministic vertex and edge
  * set ordering (via {@link LinkedHashMap} and {@link LinkedHashSet}). The defaults are reasonable
  * for most use-cases, only change if you know what you are doing.
+ *
+ * 可以通过更改从构造函数提供的GraphSpecificsStrategy来调整此类的行为。 所有实现的策略都保证确定性顶点和边集排序（通过LinkedHashMap和LinkedHashSet）。 默认值对于大多数用例来说是合理的，只有在知道自己在做什么时才会改变。
  *
  * <p>
  * The default graph implementations are not safe for concurrent reads and writes from different
@@ -47,9 +53,13 @@ import java.util.function.*;
  * Graph interface} itself makes no such guarantee, so for non-default implementations, different
  * rules may apply.)
  *
+ * 默认图实现对来自不同线程的并发读取和写入不安全。 如果应用程序尝试在一个线程中修改图形，而另一个线程正在读取或写入相同的图形，则会导致未定义的行为。 但是，来自不同线程的对同一图形的并发读取是安全的。 （请注意，org.jgrapht.Graph Graph接口本身不提供此类保证，因此对于非默认实现，可能适用不同的规则。）
+ *
  * <p>
  * If you need support for concurrent reads and writes, consider using the
  * {@link org.jgrapht.graph.concurrent.AsSynchronizedGraph AsSynchronizedGraph wrapper}.
+ *
+ * 如果需要支持并发读取和写入，请考虑使用org.jgrapht.graph.concurrent.AsSynchronizedGraph AsSynchronizedGraph包装器。
  *
  * @param <V> the graph vertex type
  * @param <E> the graph edge type
